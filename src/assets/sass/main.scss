@@ -1,0 +1,8 @@
+@import 'pages/to-do-list',
+        'pages/to-do-card';
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0;
+}
