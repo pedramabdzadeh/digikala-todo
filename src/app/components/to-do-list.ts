@@ -9,32 +9,13 @@ export default class ToDoList {
     private _toDoListCards: ToDoCardModel[] = [];
 
     constructor(rootElement: JQuery) {
-        this.checkIfAnyCardsExists();
+        this.onEmptyCardsList();
         this.toDoListContainer.append(this.title);
         this.toDoListContainer.append(this.toDoCardsContainer);
         rootElement.append(this.toDoListContainer);
     }
 
-    private checkIfAnyCardsExists(): boolean {
-        if (!localStorage.getItem('cards') || JSON.parse(localStorage.getItem('cards')).length === 0) {
-            this.onEmptyCardsList();
-            return false;
-        } else {
-            this.loadCards();
-            return true;
-        }
-    }
-
-    private loadCards(): void {
-        this._toDoListCards = JSON.parse(localStorage.getItem('cards'));
-        for (const card of this._toDoListCards) {
-            /* needs more analysis*/
-            this.toDoCardsContainer.append(new ToDoCard(card.id, card.toDos, card.title, card.color).cardElement);
-        }
-        this.addCreateButton();
-    }
-
-    private addCreateButton() {
+    private addCreateButton(): void {
         const message = 'Create Card';
         const createButton = $('<button class="create-button main-color"> ' + message + '</button>');
         this.toDoCardsContainer.append(createButton);
@@ -51,6 +32,7 @@ export default class ToDoList {
         noCardButton.on('click', () => {
             noCardButton.remove();
             this.createNewCard();
+            this.addCreateButton();
         });
     }
 
@@ -58,7 +40,8 @@ export default class ToDoList {
         const newCard = new ToDoCard(Math.floor(Math.random()* 10000), [], '');
         this._toDoListCards.push(newCard.card);
         this.toDoCardsContainer.append(newCard.cardElement);
-        localStorage.setItem('cards', JSON.stringify(this._toDoListCards));
+        newCard.cardElement.hide();
+        newCard.cardElement.fadeIn();
     }
 
     get toDoListCards(): ToDoCardModel[] {

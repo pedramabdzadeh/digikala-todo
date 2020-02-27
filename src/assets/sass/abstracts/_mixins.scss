@@ -1,13 +1,28 @@
 @import 'variables';
+@import '~sass-mq';
 
 @mixin create-card() {
-  width: 15vw;
-  height: 40vh;
+  width: 19%;
+  height: 50vh;
   box-sizing: border-box;
   cursor: default;
   box-shadow: 0 0 1px $light-grey;
   margin-left: 10px;
   margin-top: 4px;
+
+  @include mq($until: mobile) {
+    width: 90vw;
+    height: 60vh;
+  }
+
+  @include mq($from: mobile, $until: 600px) {
+    width: 90vw;
+    height: 70vh;
+  }
+  @include mq($from: 600px, $until: 1170px) {
+    width: 42%;
+    height: 70vh;
+  }
 
 }
 
@@ -16,4 +31,17 @@
     color 0.5s linear,
     box-shadow 0.5s linear
   ;
+}
+
+@mixin customize-scrollbar($width: 0.2em) {
+  &::-webkit-scrollbar-track {
+  }
+
+  &::-webkit-scrollbar {
+    width: $width;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $main-color;
+  }
 }

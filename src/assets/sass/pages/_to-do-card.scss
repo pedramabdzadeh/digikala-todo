@@ -7,8 +7,9 @@
   margin-left: 10px;
   box-sizing: border-box;
   position: relative;
+  display: flex;
+  flex-direction: column;
   padding: 1%;
-  overflow-y: auto;
 
   &.blue {
     background-color: $blue;
@@ -21,17 +22,21 @@
   &.white {
     background-color: hsla(0, 0%, 100%, 1);
   }
-  & > div:first-of-type {
+  & > #body {
+    @include customize-scrollbar;
 
-    height: 80%;
-    min-height: 100%;
+    overflow-y: auto;
+    height: 90%;
     display: flex;
     flex-direction: column;
+    & > div:first-of-type {
+      height: auto;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
   }
-  & > #colors-bar {
-    position: absolute;
-    bottom: 0;
-    left: 5%;
+  #colors-bar {
     height: 10%;
     width: 90%;
     border-top: 1px solid $light-grey;
@@ -79,11 +84,10 @@
     background-color: rgba(0, 0, 0, 0);
     border: none;
     cursor: pointer;
-    font-size: xx-small;
     font-weight: bolder;
     width: 20%;
     &:hover {
-      box-shadow: 0 0 4px $light-grey;
+      color: red;
     }
   }
 }
@@ -96,6 +100,7 @@
   text-align: left;
   cursor: pointer;
   margin-top: 2%;
+  margin-bottom: 10%;
   height: 4vh;
   width: 100%;
   border-radius: 2px;
@@ -110,6 +115,15 @@
   flex-direction: row;
   width: 100%;
   align-items: center;
+  & > .delete-item {
+    border: none;
+    color: black;
+    font-size: xx-small;
+    &:hover {
+      color: red;
+      background-color: rgba(0, 0, 0, 0);
+    }
+  }
   button {
     width: 15px;
     height: 15px;

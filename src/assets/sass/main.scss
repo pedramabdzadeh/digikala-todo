@@ -1,8 +1,9 @@
 @import 'pages/to-do-list',
         'pages/to-do-card';
-
+@import '~sass-mq';
 body {
   overflow-x: hidden;
   overflow-y: auto;
   margin: 0;
+  @include customize-scrollbar(0.3em);
 }
