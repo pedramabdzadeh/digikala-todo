@@ -9,7 +9,7 @@ You can use either index.html file in the project/dist or `npx serve dist` to se
 ## Build Project 
 Run `webpack --config webpack.config.js` on project root.
 
-##Technologies and Libraries
+## Technologies and Libraries
 ### [jQuery](https://learn.jquery.com/)
 ### [Webpack](https://webpack.js.org/)
 ### [npm](https://npmjs.com)
