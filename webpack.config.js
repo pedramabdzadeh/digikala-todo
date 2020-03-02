@@ -1,4 +1,6 @@
 const path = require('path');
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+
 module.exports = {
     watch: true,
     entry: './src/index.ts',
@@ -26,8 +28,22 @@ module.exports = {
                     'sass-loader',
                 ],
             },
-        ]
+            {
+                 test: /\.(png|svg|jpg|gif)$/,
+                 use: [
+                       'file-loader',
+                 ],
+            },
+        ],
     },
+    plugins: [
+        new CopyWebpackPlugin([
+            {
+                from:'src/assets/icons',
+                to:'assets/'
+            }
+        ]),
+    ],
     resolve: {
         extensions: ['.tsx', '.ts', '.js', '.jsx', '.scss']
     },

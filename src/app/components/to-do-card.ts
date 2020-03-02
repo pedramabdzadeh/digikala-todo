@@ -6,9 +6,9 @@ import ToDoCardMaximized from './to-do-card-maximized';
 export default class ToDoCard {
     private readonly _card: ToDoCardModel;
     private _cardElement: JQuery = $('<div class="to-do-container"><div id="body"><div></div></div></div></div>');
-    private title: JQuery = $('<div class="card-title"><input type="text" placeholder="Enter Title"/><button>X</button></div>');
+    private _title: JQuery = $('<div class="card-title"><input type="text" placeholder="Enter Title"/><button>X</button></div>');
     private colors = ['yellow', 'blue', 'red', 'white', 'green'];
-    private colorsBar: JQuery = $('<div id="colors-bar"></div>');
+    private _colorsBar: JQuery = $('<div id="colors-bar"></div>');
 
     constructor(id: number, toDos: string[], title: string, color?: string) {
         this._card = {
@@ -17,15 +17,14 @@ export default class ToDoCard {
             toDos,
             color
         };
-        this.title.attr('id', this.card.id + '-title');
-        this.title.children('button').on('click', ()=> {
+        this._title.attr('id', this.card.id + '-title');
+        this._title.children('button').on('click', ()=> {
             this.deleteCard();
         });
-        this.cardElement.children().first().children().append(this.title);
+        this.cardElement.children().first().children().append(this._title);
         this.addColors();
-        this.cardElement.append(this.colorsBar);
+        this.cardElement.append(this._colorsBar);
         this.addToDo();
-
     }
 
     private deleteCard() {
@@ -34,23 +33,31 @@ export default class ToDoCard {
 
     private addToDo() {
         const createItemButton = $('<button class="create-new-item">Add To do</button>');
+        const cardBody = this.cardElement.find('#body > div');
         createItemButton.on('click', ()=> {
             const toDoItem = new ToDoItem('', this.cardElement);
-            this.cardElement.children().first().children().first().append(toDoItem.toDoElement);
+            cardBody.append(toDoItem.toDoElement);
             toDoItem.toDoElement.hide();
             toDoItem.toDoElement.fadeIn();
-            this.cardElement.children().first().children().first().append(createItemButton);
+            cardBody.append(createItemButton);
         });
-        this.cardElement.children().first().children().first().append(createItemButton);
+        cardBody.append(createItemButton);
     }
 
 
-    get cardElement(): JQuery<HTMLElement> {
+    get cardElement(): JQuery {
         return this._cardElement;
     }
 
     get card(): ToDoCardModel {
         return this._card;
+    }
+
+    get title(): JQuery {
+        return this._title;
+    }
+    get colorsBar(): JQuery {
+        return this._colorsBar;
     }
 
     private addColors() {
@@ -63,7 +70,12 @@ export default class ToDoCard {
                     this._cardElement.addClass(e.target.className);
                     this.card.color = e.target.className;
             });
-            this.colorsBar.append(button);
+            this._colorsBar.append(button);
         }
+        const maxButton = $('<img src="./assets/resize.png" id="resize-image" alt="max"/>');
+        maxButton.on('click', () => {
+            const maximized = new ToDoCardMaximized(this);
+        });
+        this.colorsBar.append(maxButton);
     }
 }

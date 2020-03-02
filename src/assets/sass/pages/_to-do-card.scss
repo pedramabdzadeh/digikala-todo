@@ -1,7 +1,7 @@
 @import '../abstracts/mixins';
 @import '../abstracts/variables';
 
-.to-do-container{
+.to-do-container {
   @include create-card;
 
   box-shadow: 0 0 4px $light-grey;
@@ -79,6 +79,16 @@
     }
     .yellow {
       background-color: $yellow;
+    }
+    img {
+      margin-left: 5%;
+      width: 18px;
+      height: 18px;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $light-grey;
+      }
     }
   }
 }
@@ -167,26 +177,5 @@
   }
   input.completed {
     text-decoration: line-through;
-  }
-}
-
-.to-do-maximized {
-  position: fixed;
-  margin-left: -1%;
-  width: 102vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  background-color: $light-grey;
-
-  .to-do-container {
-    background-color: white;
-    position: absolute;
-    z-index: 10 ;
-    top: 10vh;
-    left: 33vw;
-    height: 80vh;
-    box-shadow: 0 0 10px black;
-    width: 35vw;
   }
 }

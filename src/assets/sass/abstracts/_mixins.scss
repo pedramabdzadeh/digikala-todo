@@ -19,8 +19,9 @@
     width: 90vw;
     height: 70vh;
   }
+
   @include mq($from: 600px, $until: 1170px) {
-    width: 42%;
+    width: 45%;
     height: 70vh;
   }
 

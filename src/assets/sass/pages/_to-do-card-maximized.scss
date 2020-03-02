@@ -1,0 +1,79 @@
+@import '../abstracts/variables';
+
+.to-do-maximized {
+  position: fixed;
+  margin-left: -1%;
+  width: 102vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: $light-grey;
+  #colors-bar {
+    .blue {
+      background-color: $blue-full;
+    }
+
+    .red {
+      background-color: $red-full;
+    }
+
+    .yellow {
+      background-color: $yellow-full;
+    }
+
+    .green {
+      background-color: $green-full;
+    }
+
+    .white {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+  }
+  .to-do-container {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 10 ;
+    top: 10vh;
+    left: 33vw;
+    height: 80vh;
+    box-shadow: 0 0 10px mix($light-grey, hsla(0, 0%, 0%, 1), 80);
+    width: 35vw;
+
+    &.blue {
+      background-color: $blue-full;
+    }
+
+    &.red {
+      background-color: $red-full;
+    }
+
+    &.yellow {
+      background-color: $yellow-full;
+    }
+
+    &.green {
+      background-color: $green-full;
+    }
+
+    &.white {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+    @include mq($until: mobile) {
+      width: 90vw;
+      height: 60vh;
+      left: 3vw;
+    }
+
+    @include mq($from: mobile, $until: 600px) {
+      width: 90vw;
+      height: 70vh;
+      left: 3vw;
+    }
+    @include mq($from: 600px, $until: 1170px) {
+      width: 60vw;
+      height: 70vh;
+      left: 20vw;
+    }
+  }
+
+}
